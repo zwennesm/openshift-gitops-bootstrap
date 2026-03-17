@@ -1,0 +1,79 @@
+apiVersion: platform.stackrox.io/v1alpha1
+kind: Central
+metadata:
+  name: stackrox-central-services
+  namespace: stackrox
+spec:
+  central:
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 1
+      limits:
+        memory: 4Gi
+        cpu: 3
+    db:
+      resources:
+        requests:
+          memory: 1Gi
+          cpu: 512m
+        limits:
+          memory: 2Gi
+          cpu: 1
+      persistence:
+        persistentVolumeClaim:
+          size: 20Gi
+  scannerV4:
+    indexer:
+      resources:
+        requests:
+          memory: 1Gi
+          cpu: 512m
+        limits:
+          memory: 2Gi
+          cpu: 1
+      scaling:
+        autoScaling: Disabled
+        replicas: 1
+    db:
+      resources:
+        requests:
+          memory: 1Gi
+          cpu: 512m
+        limits:
+          memory: 2Gi
+          cpu: 1
+      persistence:
+        persistentVolumeClaim:
+          size: 20Gi
+    matcher:
+      resources:
+        requests:
+          memory: 1Gi
+          cpu: 512m
+        limits:
+          memory: 2Gi
+          cpu: 1
+      scaling:
+        autoScaling: Disabled
+        replicas: 1
+  scanner:
+    analyzer:
+      resources:
+        requests:
+          memory: 1Gi
+          cpu: 512m
+        limits:
+          memory: 2Gi
+          cpu: 1
+      scaling:
+        autoScaling: Disabled
+        replicas: 1
+    db:
+      resources:
+        requests:
+          memory: 1Gi
+          cpu: 512m
+        limits:
+          memory: 2Gi
+          cpu: 1

@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1beta1
+kind: ArgoCD
+metadata:
+  name: cluster-gitops
+  namespace: openshift-gitops
+spec:
+  server:
+    route:
+      enabled: true
+  sso:
+    provider: dex
+    dex:
+      openShiftOAuth: true
+  rbac:
+    policy: |
+      g, cluster-admins, role:admin
+    defaultPolicy: "role:readonly"
