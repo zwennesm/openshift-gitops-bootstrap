@@ -4,6 +4,7 @@ metadata:
   name: cluster-gitops
   namespace: openshift-gitops
 spec:
+  applicationSet: {}
   server:
     route:
       enabled: true
@@ -14,4 +15,6 @@ spec:
   rbac:
     policy: |
       g, cluster-admins, role:admin
+      g, admins, role:admin
     defaultPolicy: "role:readonly"
+  kustomizeBuildOptions: "--enable-helm"

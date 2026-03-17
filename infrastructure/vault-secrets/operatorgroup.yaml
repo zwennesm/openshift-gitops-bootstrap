@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: vault-secrets-operator-group
+  namespace: vault-secrets-operator-system
+spec:
+  targetNamespaces:
+    - vault-secrets-operator-system

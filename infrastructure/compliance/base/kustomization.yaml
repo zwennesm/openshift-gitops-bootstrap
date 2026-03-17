@@ -5,3 +5,5 @@ resources:
 - namespace.yaml
 - operatorgroup.yaml
 - subscription.yaml
+- scan-setting-binding.yaml
+- tailored-profile.yaml

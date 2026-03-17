@@ -1,30 +1,47 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: acs-deployments
+  name: cluster
   namespace: openshift-gitops
 spec:
   generators:
-    - git:
-        repoURL: git@github.com:zwennesm/openshift-gitops-bootstrap.git
-        revision: HEAD
-        directories:
-          - path: clusters/*
+    - matrix:
+        generators:
+          - git:
+              repoURL: "https://github.com/zwennesm/openshift-gitops-bootstrap"
+              revision: HEAD
+              directories:
+                - path: clusters/*
+              pathParamPrefix: cluster
+          - list:
+              elements:
+                - app: cluster
+                  path: clusters/{{cluster.path.basename}}
+                - app: vault
+                  path: infrastructure/vault/base
+                - app: vault-secrets
+                  path: infrastructure/vso-operator
+                - app: gitops
+                  path: infrastructure/gitops/base
+                - app: acs
+                  path: infrastructure/acs/overlays/{{cluster.path.basename}}
+                - app: compliance
+                  path: infrastructure/compliance/base
   template:
     metadata:
-      name: "cluster-{{path.basename}}"
+      name: "{{cluster.path.basename}}-{{app}}"
     spec:
       project: default
       source:
-        repoURL: git@github.com:zwennesm/openshift-gitops-bootstrap.git
+        repoURL: "https://github.com/zwennesm/openshift-gitops-bootstrap"
         targetRevision: HEAD
         path: "{{path}}"
       destination:
-        server: "https://kubernetes.default.svc"
-        namespace: "{{path.basename}}"
+        server: https://kubernetes.default.svc
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-          - CreateNamespace=true
+        - CreateNamespace=true
+        

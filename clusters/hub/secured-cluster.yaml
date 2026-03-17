@@ -7,14 +7,6 @@ spec:
   clusterName: hub
   admissionControl:
     replicas: 1
-  collector:
-    resources:
-      requests:
-        memory: 256Mi
-        cpu: 256m
-      limits:
-        memory: 512Mi
-        cpu: 512m
   sensor:
     resources:
       requests:
