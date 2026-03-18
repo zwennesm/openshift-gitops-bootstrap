@@ -1,0 +1,8 @@
+name: OpenShift-Local
+type: openshift
+uiEndpoint: central.apps-crc.testing
+enabled: true
+groups:
+  - key: groups
+    value: "system:admin"
+    role: Admin

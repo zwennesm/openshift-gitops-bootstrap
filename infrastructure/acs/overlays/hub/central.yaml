@@ -5,6 +5,9 @@ metadata:
   namespace: stackrox
 spec:
   central:
+    declarativeConfiguration:
+      configMaps:
+        - name: openshift-auth-provider
     exposure:
       route:
         enabled: true
