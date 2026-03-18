@@ -4,14 +4,7 @@ metadata:
   name: stackrox-central-services
   namespace: stackrox
 spec:
-  customize:
-    envVars:
-      - name: ROX_DECLARATIVE_CONFIG_DIR
-        value: "/run/stackrox.io/declarative-configuration"
   central:
-    declarativeConfiguration:
-      secrets:
-        - name: openshift-auth-provider
     exposure:
       route:
         enabled: true

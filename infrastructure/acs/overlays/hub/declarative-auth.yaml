@@ -1,10 +1,9 @@
-name: OpenShift-Local
-type: openshift
-uiEndpoint: central-stackrox.apps-crc.testing
-enabled: true
-groups:
-  - key: groups
-    value: "system:authenticated"
-    role: Admin
-openshift:
-  enable: true
+apiVersion: v1
+data:
+  declarative-auth.yaml: |
+    openshift:
+      enable: true
+kind: ConfigMap
+metadata:
+  name: declarative-configurations
+  namespace: stackrox
