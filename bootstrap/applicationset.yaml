@@ -20,7 +20,7 @@ spec:
                 - app: vault
                   path: infrastructure/vault/base
                 - app: vault-secrets
-                  path: infrastructure/vso-operator
+                  path: infrastructure/vault-secrets/base
                 - app: gitops
                   path: infrastructure/gitops/base
                 - app: acs
@@ -44,4 +44,3 @@ spec:
           selfHeal: true
         syncOptions:
         - CreateNamespace=true
-        
