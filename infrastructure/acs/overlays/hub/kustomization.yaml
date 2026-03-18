@@ -10,10 +10,9 @@ configMapGenerator:
   namespace: stackrox
   files:
   - declarative-auth.yaml
+  options:
+      disableNameSuffixHash: true
 
 patches:
 - path: patch-central-resources.yaml
 - path: patch-acs-nodeselector.yaml
-
-generatorOptions:
-  disableNameSuffixHash: false
