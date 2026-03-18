@@ -1,6 +1,6 @@
 name: OpenShift-Local
 type: openshift
-uiEndpoint: central.apps-crc.testing
+uiEndpoint: central-stackrox.apps-crc.testing
 enabled: true
 groups:
   - key: groups
