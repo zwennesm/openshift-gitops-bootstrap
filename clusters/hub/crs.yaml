@@ -1,0 +1,14 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: cluster-registration-secret
+  namespace: stackrox
+spec:
+  vaultAuthRef: vault-auth
+  mount: secret
+  type: kv-v2
+  path: stackrox/crs
+  refreshAfter: 1h
+  destination:
+    name: cluster-registration-secret
+    create: true

@@ -6,3 +6,5 @@ resources:
 - namespace-stackrox.yaml
 - operatorgroup.yaml
 - subscription.yaml
+- vault-auth.yaml
+- vault-connection.yaml
