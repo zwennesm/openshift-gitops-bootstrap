@@ -6,3 +6,5 @@ groups:
   - key: groups
     value: "system:admin"
     role: Admin
+openshift:
+  enable: true
