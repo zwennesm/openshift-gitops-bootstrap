@@ -6,7 +6,7 @@ metadata:
 spec:
   central:
     declarativeConfiguration:
-      configMaps:
+      secrets:
         - name: openshift-auth-provider
     exposure:
       route:

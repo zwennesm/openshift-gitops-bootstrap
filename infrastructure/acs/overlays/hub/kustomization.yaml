@@ -5,7 +5,7 @@ resources:
 - ../../base
 - central.yaml
 
-configMapGenerator:
+secretGenerator:
 - name: openshift-auth-provider
   namespace: stackrox
   files:
