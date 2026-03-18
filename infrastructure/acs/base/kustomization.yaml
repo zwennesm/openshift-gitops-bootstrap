@@ -8,3 +8,4 @@ resources:
 - subscription.yaml
 - vault-auth.yaml
 - vault-connection.yaml
+- crs.yaml
