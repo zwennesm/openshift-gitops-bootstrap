@@ -8,6 +8,6 @@ spec:
     matchLabels:
       istio-prometheus-ignore: "false" # Default Istio sidecar label
   podMetricsEndpoints:
-  - port: http-envoy-prom
-    path: /stats/prometheus
-    interval: 15s
+    - port: http-envoy-prom
+      path: /stats/prometheus
+      interval: 15s

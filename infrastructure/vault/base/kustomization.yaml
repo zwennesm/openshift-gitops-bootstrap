@@ -4,28 +4,26 @@ kind: Kustomization
 namespace: vault
 
 helmCharts:
-- name: vault
-  repo: https://helm.releases.hashicorp.com
-  version: 0.32.0
-  releaseName: vault
-  namespace: vault
-  valuesInline:
-    injector:
-      image:
-        repository:
-          docker.io/hashicorp/vault-k8s
-      agentImage:
-        repository:
-          docker.io/hashicorp/vault-k8s
-    global:
-      openshift: true
-    server:
-      image:
-        repository: docker.io/hashicorp/vault
-      dev:
-        enabled: true
-      route:
-        enabled: true
-        host: vault.apps-crc.testing
-        tls:
-          termination: "edge" # needed with dev mode
+  - name: vault
+    repo: https://helm.releases.hashicorp.com
+    version: 0.32.0
+    releaseName: vault
+    namespace: vault
+    valuesInline:
+      injector:
+        image:
+          repository: docker.io/hashicorp/vault-k8s
+        agentImage:
+          repository: docker.io/hashicorp/vault-k8s
+      global:
+        openshift: true
+      server:
+        image:
+          repository: docker.io/hashicorp/vault
+        dev:
+          enabled: true
+        route:
+          enabled: true
+          host: vault.apps-crc.testing
+          tls:
+            termination: "edge" # needed with dev mode

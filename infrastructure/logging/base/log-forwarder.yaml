@@ -1,0 +1,31 @@
+apiVersion: observability.openshift.io/v1
+kind: ClusterLogForwarder
+metadata:
+  name: instance 
+  namespace: openshift-logging
+spec:
+  serviceAccount:
+    name: logging-collector
+  outputs:
+    - name: splunk-receiver
+      type: splunk
+      splunk:
+        url: 'http://splunk.splunk-lab:8088'
+        authentication:
+          token:
+            key: hec-token
+            secretName: splunk-hec-token
+  inputs:
+    - name: audit-logs
+      type: audit
+      audit:
+        sources:
+          - kubeAPI
+          - openshiftAPI
+          - auditd
+  pipelines:
+    - name: audit-to-splunk
+      inputRefs:
+        - audit-logs
+      outputRefs:
+        - splunk-receiver

@@ -7,6 +7,6 @@ roleRef:
   kind: ClusterRole
   name: cluster-monitoring-view
 subjects:
-- kind: ServiceAccount
-  name: kiali-service-account
-  namespace: istio-system
+  - kind: ServiceAccount
+    name: kiali-service-account
+    namespace: istio-system

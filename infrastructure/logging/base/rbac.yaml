@@ -14,9 +14,9 @@ roleRef:
   kind: ClusterRole
   name: collect-application-logs
 subjects:
-- kind: ServiceAccount
-  name: logging-collector
-  namespace: openshift-logging
+  - kind: ServiceAccount
+    name: logging-collector
+    namespace: openshift-logging
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -27,9 +27,9 @@ roleRef:
   kind: ClusterRole
   name: collect-infrastructure-logs
 subjects:
-- kind: ServiceAccount
-  name: logging-collector
-  namespace: openshift-logging
+  - kind: ServiceAccount
+    name: logging-collector
+    namespace: openshift-logging
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -40,6 +40,6 @@ roleRef:
   kind: ClusterRole
   name: collect-audit-logs
 subjects:
-- kind: ServiceAccount
-  name: logging-collector
-  namespace: openshift-logging
+  - kind: ServiceAccount
+    name: logging-collector
+    namespace: openshift-logging
