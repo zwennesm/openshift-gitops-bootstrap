@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cluster
+  name: cluster-apps-autodiscovery
   namespace: openshift-gitops
 spec:
   generators:
@@ -12,35 +12,28 @@ spec:
               revision: HEAD
               directories:
                 - path: clusters/*
-              pathParamPrefix: cluster
-          - list:
-              elements:
-                - app: cluster
-                  path: clusters/{{cluster.path.basename}}
-                - app: vault
-                  path: infrastructure/vault/base
-                - app: vault-secrets
-                  path: infrastructure/vault-secrets/base
-                - app: gitops
-                  path: infrastructure/gitops/base
-                - app: acs
-                  path: infrastructure/acs/overlays/{{cluster.path.basename}}
-                - app: compliance
-                  path: infrastructure/compliance/base
+          - git:
+              repoURL: "https://github.com/zwennesm/openshift-gitops-bootstrap"
+              revision: HEAD
+              directories:
+                - path: "clusters/{{path.basename}}/*"
   template:
     metadata:
-      name: "{{cluster.path.basename}}-{{app}}"
+      name: "{{path[0].basename}}-{{path.basename}}"
     spec:
       project: default
       source:
         repoURL: "https://github.com/zwennesm/openshift-gitops-bootstrap"
         targetRevision: HEAD
-        path: "{{path}}"
+        path: "{{path.path}}"
       destination:
-        server: https://kubernetes.default.svc
+        # Assumes your cluster is registered in Argo CD with its folder name
+        name: "{{path[0].basename}}"
+        namespace: openshift-gitops
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+          - ServerSideApply=true
