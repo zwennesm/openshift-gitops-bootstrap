@@ -2,17 +2,17 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ../../base
-- central.yaml
+  - ../../base
+  - central.yaml
 
 secretGenerator:
-- name: openshift-auth-provider
-  namespace: stackrox
-  files:
-  - declarative-auth.yaml
-  options:
+  - name: openshift-auth-provider
+    namespace: stackrox
+    files:
+      - declarative-auth.yaml
+    options:
       disableNameSuffixHash: true
 
 patches:
-- path: patch-central-resources.yaml
-- path: patch-acs-nodeselector.yaml
+  - path: patch-central-resources.yaml
+  - path: patch-acs-nodeselector.yaml

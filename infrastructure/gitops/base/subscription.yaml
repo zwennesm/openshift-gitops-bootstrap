@@ -11,5 +11,5 @@ spec:
   sourceNamespace: openshift-marketplace
   config:
     env:
-    - name: DISABLE_DEFAULT_ARGOCD_INSTANCE
-      value: "true"
+      - name: DISABLE_DEFAULT_ARGOCD_INSTANCE
+        value: "true"

@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: splunk
+  namespace: splunk-lab
+spec:
+  host: splunk-splunk-lab.apps-crc.testing
+  port:
+    targetPort: web
+  to:
+    kind: Service
+    name: splunk

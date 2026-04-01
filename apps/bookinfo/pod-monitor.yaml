@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: istio-ingressgateway-monitor
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway # Matches the label we used for the gateway deployment
+  podMetricsEndpoints:
+    - port: http-envoy-prom
+      path: /stats/prometheus
+      interval: 30s

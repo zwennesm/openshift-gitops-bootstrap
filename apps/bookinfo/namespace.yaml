@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bookinfo
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    istio-discovery: enabled
+    istio-injection: enabled

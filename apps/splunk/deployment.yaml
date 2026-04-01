@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: splunk
+  namespace: splunk-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: splunk
+  template:
+    metadata:
+      labels:
+        app: splunk
+    spec:
+      containers:
+        - name: splunk
+          image: splunk/splunk:10.2-rhel9
+          env:
+            - name: SPLUNK_START_ARGS
+              value: "--accept-license"
+            - name: SPLUNK_PASSWORD
+              value: "password123"
+            - name: SPLUNK_HEC_TOKEN
+              value: "d5ba91bb-977f-4508-a7ac-6ecdde260d39"
+            - name: SPLUNK_HEC_SSL
+              value: "false"
+            - name: SPLUNK_GENERAL_TERMS
+              value: "--accept-sgt-current-at-splunk-com"
+          ports:
+            - containerPort: 8000
+            - containerPort: 8088
+          volumeMounts:
+            - name: splunk-storage
+              mountPath: /opt/splunk/etc
+              subPath: etc
+            - name: splunk-storage
+              mountPath: /opt/splunk/var
+              subPath: var
+      volumes:
+        - name: splunk-storage
+          persistentVolumeClaim:
+            claimName: splunk-pvc
